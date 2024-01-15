@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { IUser } from '../interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
+import { GetUserResponse } from '../interfaces/get-user.model';
+import { RegisterLoginUserResponse } from '../interfaces/register-login-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +25,11 @@ export class UserService {
     const data = { email, password };
     return new Promise(resolve => {
       this.http.post(`${URL}/user/login`, data).subscribe(async res => {
-        console.log(res);
+        const response = res as RegisterLoginUserResponse;
   
-        if(res['ok']){
-          await this.saveToken(res['token']);
-          this.user = res['user'];
+        if(response['ok']){
+          await this.saveToken(response['token']);
+          this.user = response['user'];
           resolve(true);
         } else {
           this.token = '';
@@ -48,12 +50,11 @@ export class UserService {
 
   register(user: IUser){
     return new Promise(resolve => {
-      this.http.post(`${URL}/user/create`, user).subscribe(async res=>{
-        console.log(res);
-
-        if(res['ok']){
-          await this.saveToken(res['token']);
-          this.user = res['user'];
+      this.http.post(`${URL}/user/create`, user).subscribe(async (res)=>{
+        const response = res as RegisterLoginUserResponse;
+        if(response['ok']){
+          await this.saveToken(response['token']);
+          this.user = response['user'];
           resolve(true);
         } else {
           this.token = '';
@@ -95,8 +96,9 @@ export class UserService {
         'x-token': this.token
       });
       this.http.get(`${URL}/user/`, { headers }).subscribe(resp => {
-        if(resp['ok'] != null){
-          this.user = resp['user'];
+        const response = resp as GetUserResponse;
+        if(response['ok'] != null){
+          this.user = response['user'];
           resolve(true);
         } else{
           this.navCtrl.navigateRoot('/login');
