@@ -1,0 +1,16 @@
+<div *ngFor="let r of rates">
+  <ng-template [ngIf]="r.painted" [ngIfElse]="noRate">
+    <ion-icon
+      name="star" 
+      (click)="rate(r.rate)"
+      [ngStyle]="{'color':'#ffffff'}">
+    </ion-icon>  
+  </ng-template>
+  <ng-template #noRate>
+    <ion-icon
+      name="star-outline" 
+      (click)="rate(r.rate)"
+      [ngStyle]="{'color':'#000000'}">
+    </ion-icon>  
+  </ng-template>
+</div>

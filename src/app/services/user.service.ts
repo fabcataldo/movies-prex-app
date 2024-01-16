@@ -5,12 +5,15 @@ import { IUser } from '../interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
 import { GetUserResponse } from '../interfaces/get-user.model';
 import { RegisterLoginUserResponse } from '../interfaces/register-login-user.model';
+import { environment } from 'src/environments/environment';
 
+const URL = environment.url;
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
-  token = '';
+  private token = '';
   private user: IUser | null = null;
 
   constructor(private storage: Storage, private http: HttpClient, private navCtrl: NavController) {
@@ -21,10 +24,10 @@ export class UserService {
     await this.storage.create();
   }
 
-  login(email: string, password: string){
-    const data = { email, password };
+  login(username: string, password: string){
+    const data = { username, password };
     return new Promise(resolve => {
-      this.http.post(`${URL}/user/login`, data).subscribe(async res => {
+      this.http.post(`${URL}/users/login`, data).subscribe(async res => {
         const response = res as RegisterLoginUserResponse;
   
         if(response['ok']){
@@ -50,7 +53,7 @@ export class UserService {
 
   register(user: IUser){
     return new Promise(resolve => {
-      this.http.post(`${URL}/user/create`, user).subscribe(async (res)=>{
+      this.http.post(`${URL}/users/create`, user).subscribe(async (res)=>{
         const response = res as RegisterLoginUserResponse;
         if(response['ok']){
           await this.saveToken(response['token']);
@@ -84,6 +87,10 @@ export class UserService {
     this.token = await this.storage.get('token') || null;
   }
 
+  getToken(): string {
+    return this.token;
+  }
+
   async validateToken(): Promise<boolean>{
     await this.loadToken();
     if(!this.token){
@@ -95,7 +102,7 @@ export class UserService {
       const headers = new HttpHeaders({
         'x-token': this.token
       });
-      this.http.get(`${URL}/user/`, { headers }).subscribe(resp => {
+      this.http.get(`${URL}/users/`, { headers }).subscribe(resp => {
         const response = resp as GetUserResponse;
         if(response['ok'] != null){
           this.user = response['user'];

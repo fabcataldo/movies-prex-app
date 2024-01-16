@@ -1,10 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Menu Button</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -13,8 +15,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div>
+    <!-- Refresher -->
+    <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <movies-list [movies]="movies"></movies-list>
+
+    <ion-infinite-scroll threshold="150px"
+      (ionInfinite)="getNextMovies($event)"
+      [disabled]="!enabled">
+    <ion-infinite-scroll-content >
+    </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

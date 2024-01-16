@@ -25,6 +25,15 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-.page {
+.internal-page {
     background: var(--page-background);
+    padding: 20px 20px;
+    height: 100%;
+}
+
+.flex-center-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -4,10 +4,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edit-movie</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="page">
+  <div class="internal-page flex-center-center">
+    <div class="fields-container flex-center-center">
+      <form (ngSubmit)="updateMovie(fMovie)" #fMovie="ngForm">
+        <ion-input
+          label="Title"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter title"
+          name="title"
+          type="text"
+          [(ngModel)]="movieForSaving.title"
+          required></ion-input>
+
+        <ion-input 
+          label="Description"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter description"
+          name="description"
+          type="text"
+          [(ngModel)]="movieForSaving.description"></ion-input>         
+        
+        <movie-star-rate [movieRate]="movieForSaving.rate" (movieRateChanged)="onMovieRateChange(newRate)">
+          
+        </movie-star-rate>
+        <ion-button shape="round" type="submit" expand="block">Create account</ion-button>  
+      </form>
+    </div>
+  </div>
+
 </ion-content>
+
+
+

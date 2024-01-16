@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EditMoviePageRoutingModule } from './edit-movie-routing.module';
 
 import { EditMoviePage } from './edit-movie.page';
+import { MovieStarRateComponent } from './components/movie-star-rate/movie-star-rate.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditMoviePageRoutingModule
+    EditMoviePageRoutingModule,
+    
   ],
-  declarations: [EditMoviePage]
+  declarations: [EditMoviePage, MovieStarRateComponent]
 })
 export class EditMoviePageModule {}

@@ -5,7 +5,17 @@
     </ion-avatar>
 
     <div class="fields-container flex-center-center">
-      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
+      <form (ngSubmit)="register(fReg)" #fReg="ngForm">
+        <ion-input
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter email"
+        name="email"
+        type="text"
+        [(ngModel)]="registerUser.email"
+        required></ion-input>
+
         <ion-input
           label="Username"
           label-placement="floating"
@@ -13,7 +23,7 @@
           placeholder="Enter username"
           name="username"
           type="text"
-          [(ngModel)]="loginUser.username"
+          [(ngModel)]="registerUser.username"
           required></ion-input>
 
         <ion-input 
@@ -23,17 +33,11 @@
           placeholder="Enter password"
           name="password"
           type="password"
-          [(ngModel)]="loginUser.password"></ion-input>
+          [(ngModel)]="registerUser.password"></ion-input>
           
-        <ion-button shape="round" type="submit"  expand="block">Login</ion-button>  
+        <ion-button shape="round" type="submit" expand="block">Create account</ion-button>  
       </form>
     </div>
-
-    <div class="flex-center-center">      
-      <a>Create account</a>
-    </div>
-
-    <a class="recover-password-label">Forgot password?</a>
   </div>
 
 </ion-content>

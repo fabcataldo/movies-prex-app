@@ -6,14 +6,16 @@ import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class LoginPage{
-  loginUser = {
+export class RegisterPage{
+  registerUser: IUser = {
+    email: '',
+    password: '',
     username: '',
-    password: ''
+    avatar: ''
   }
 
   constructor(
@@ -22,16 +24,16 @@ export class LoginPage{
     private toastService: ToastService
   ) { }
 
-  async login(formLogin: NgForm){
-    if(formLogin.invalid){
+  async register(formReg: NgForm){
+    if(formReg.invalid){
       return;
     }
 
-    const valido = await this.userService.login(this.loginUser.username, this.loginUser.password);
-    if(valido){
+    const ok = await this.userService.register(this.registerUser);
+    if(ok){
       this.navCtrl.navigateRoot('/home', {animated: true});
     } else {
-      this.toastService.presentToast('Usuario y/o contraseña no son correctos.');
+      this.toastService.presentToast('El correo electrónico ya existe.');
     }
   }
 

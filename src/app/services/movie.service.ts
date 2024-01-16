@@ -6,10 +6,11 @@ import { environment } from 'src/environments/environment';
 import { IMovie } from '../interfaces/movie.model';
 import { UpdateMovieResponse } from '../interfaces/update-movie.model';
 
+const URL = environment.url;
 @Injectable({
   providedIn: 'root'
 })
-private const URL = environment.url;
+
 export class MovieService {
   movieChanged = new EventEmitter<IMovie>();
 
@@ -21,7 +22,7 @@ export class MovieService {
 
   updateMovie(movie: IMovie) {
     const headers = new HttpHeaders({
-      'x-token': this.userService.token
+      'x-token': this.userService.getToken()
     })
     return new Promise(resolve => {
       this.http.patch(`${URL}/movies`, movie, {headers}).subscribe((resp) => {
