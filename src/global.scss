@@ -26,9 +26,17 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 .internal-page {
-    background: var(--page-background);
+    --background: var(--page-text-color);
+    background: var(--page-text-color);
     padding: 20px 20px;
     height: 100%;
+    --color: var(--page-background);
+    color: var(--page-background);
+}
+
+.internal-components {
+    background: var(--page-text-color);
+    color: var(--page-background);
 }
 
 .flex-center-center {

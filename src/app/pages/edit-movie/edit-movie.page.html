@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>edit-movie</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" icon="caret-back" (click)="goToHome()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit movie</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +19,7 @@
           name="title"
           type="text"
           [(ngModel)]="movieForSaving.title"
+          value="movieForSaving.title"
           required></ion-input>
 
         <ion-input 
@@ -25,12 +29,13 @@
           placeholder="Enter description"
           name="description"
           type="text"
-          [(ngModel)]="movieForSaving.description"></ion-input>         
+          [(ngModel)]="movieForSaving.description"
+          value="movieForSaving.description"></ion-input>         
         
-        <movie-star-rate [movieRate]="movieForSaving.rate" (movieRateChanged)="onMovieRateChange(newRate)">
+        <movie-star-rate [movieRate]="movieForSaving.rate || 0" (movieRateChanged)="onMovieRateChange($event)">
           
         </movie-star-rate>
-        <ion-button shape="round" type="submit" expand="block">Create account</ion-button>  
+        <ion-button shape="round" type="submit" expand="block">Save</ion-button>  
       </form>
     </div>
   </div>

@@ -8,6 +8,8 @@ import { EditMoviePageRoutingModule } from './edit-movie-routing.module';
 
 import { EditMoviePage } from './edit-movie.page';
 import { MovieStarRateComponent } from './components/movie-star-rate/movie-star-rate.component';
+import { GenericPipe } from 'src/app/utils/generic-pipe/generic-pipe.pipe';
+import { MovieStarRateModule } from './components/movie-star-rate/movie-star-rate.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,8 @@ import { MovieStarRateComponent } from './components/movie-star-rate/movie-star-
     FormsModule,
     IonicModule,
     EditMoviePageRoutingModule,
-    
+    MovieStarRateModule
   ],
-  declarations: [EditMoviePage, MovieStarRateComponent]
+  declarations: [EditMoviePage]
 })
 export class EditMoviePageModule {}

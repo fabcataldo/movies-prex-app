@@ -1,16 +1,10 @@
-<div *ngFor="let r of rates">
-  <ng-template [ngIf]="r.painted" [ngIfElse]="noRate">
+<div class="container">
+  <div *ngFor="let r of (movieRate | genericPipe:getRates)"  class="star">
     <ion-icon
-      name="star" 
-      (click)="rate(r.rate)"
-      [ngStyle]="{'color':'#ffffff'}">
-    </ion-icon>  
-  </ng-template>
-  <ng-template #noRate>
-    <ion-icon
-      name="star-outline" 
-      (click)="rate(r.rate)"
-      [ngStyle]="{'color':'#000000'}">
-    </ion-icon>  
-  </ng-template>
+    name="star" 
+    (click)="!showOnly ? 'rate(r.rate)' : '() => {}'"
+    [ngStyle]="{'color': r.painted ? '#ffffff' : '#000000'}">
+  </ion-icon>
+  </div>
+  
 </div>

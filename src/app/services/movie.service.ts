@@ -12,21 +12,38 @@ const URL = environment.url;
 })
 
 export class MovieService {
+  moviePage = 0;
   movieChanged = new EventEmitter<IMovie>();
+  moviesChanged = new EventEmitter<Array<IMovie>>();
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getMovies(pull: boolean = false) {
-    return this.http.get<GetAllMoviesResponse>(`${URL}/movies/`);
+  getMovies(pull: boolean = false): Promise<boolean> {
+    if (pull) {
+      this.moviePage = 0;
+    }
+    this.moviePage++;
+    return new Promise(resolve => {
+      this.http.get<GetAllMoviesResponse>(`${URL}/movies`).subscribe((resp) => {
+        const response = resp as GetAllMoviesResponse;
+        if(response['ok']){
+          this.moviesChanged.emit(response.movies);
+          resolve(true);
+        } else {
+          resolve(false)
+        }
+      });
+    })
   }
 
   updateMovie(movie: IMovie) {
-    const headers = new HttpHeaders({
-      'x-token': this.userService.getToken()
-    })
+    console.log('movie update movie')
+    console.log(movie)
     return new Promise(resolve => {
-      this.http.patch(`${URL}/movies`, movie, {headers}).subscribe((resp) => {
+      this.http.patch(`${URL}/movies/${movie._id}`, movie).subscribe((resp) => {
         const response = resp as UpdateMovieResponse;
+        console.log('response')
+        console.log(response)
         if(response['ok']){
           this.movieChanged.emit(response['movie']);
           resolve(true);
