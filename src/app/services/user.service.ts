@@ -69,11 +69,11 @@ export class UserService {
     });
   }
 
-  getUsuario(){
+  getUsuario(): IUser{
     if(this.user?._id !== null){
       this.validateToken();
     }
-    return {...this.user};
+    return {...this.user} as IUser;
   }
 
   async saveToken(token: string){
