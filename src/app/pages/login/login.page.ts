@@ -38,4 +38,8 @@ export class LoginPage{
     this.navCtrl.navigateRoot('/change-user-logo', {animated: true, replaceUrl: true});
   }
 
+  goToRegisterPage(){
+    this.navCtrl.navigateRoot('/register', {animated: true, replaceUrl: true});
+  }
+
 }

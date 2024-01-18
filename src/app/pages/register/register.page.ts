@@ -37,4 +37,7 @@ export class RegisterPage{
     }
   }
 
+  goToLogin() {
+    this.navCtrl.navigateRoot('/login', {animated: true});
+  }
 }
