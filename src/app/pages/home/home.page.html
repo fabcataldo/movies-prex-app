@@ -1,28 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar style="
-  --background: black;
-  --color: white;">
-    <ion-buttons slot="start">
-      <ion-menu-button auto-hide="false"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Movies</ion-title>
-  </ion-toolbar>
-</ion-header>
+
+  <ion-header [translucent]="true" class="page-component-colors">
+    <ion-toolbar class="page-component-colors">
+      <ion-buttons slot="start">
+        <ion-menu-button auto-hide="false" menuToggle></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Movies</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 
 <ion-content [fullscreen]="true" class="internal-page">
-  <div>
-    <!-- Refresher -->
-    <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-
-    <movies-list [movies]="movies"></movies-list>
-
-    <ion-infinite-scroll threshold="150px"
-      (ionInfinite)="getNextMovies($event)"
-      [disabled]="!enabled">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
+  <movies-list [movies]="movies"></movies-list>
 </ion-content>

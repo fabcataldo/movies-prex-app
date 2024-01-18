@@ -13,7 +13,6 @@ export class HomePage implements OnInit{
   enabled = true;
 
   constructor(private movieService: MovieService) {
-    debugger;
     this.getNextMovies();
 
     console.log('GOT IT')
@@ -21,7 +20,7 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.getNextMovies();
+    this.getNextMovies();
   }
 
   async getNextMovies(event: any = null, pull: boolean = false){
@@ -38,33 +37,6 @@ export class HomePage implements OnInit{
         }
       }))
     }
-    // this.movieService.getMovies(pull).then((resp: Array<IMovie> | boolean)=>{
-    //   debugger;
-    //   console.log('resppp')
-    //   console.log(resp);
-    //   if(typeof(resp) !== 'boolean'){
-    //     this.movies.push(...resp);
-
-    //     console.log('this.movies home page')
-    //     console.log(this.movies)
-    //     if(event){
-    //       event.target.complete();
-  
-    //       if(resp.length === 0){
-    //         this.enabled = false;
-    //       }
-    //     }
-    //   }
-    // }).catch(err => {
-    //   console.log('GET ALL MOVIES ERROR: '+err);
-    // });
-  }
-
-  reload(event: any){
-    console.log('entro')
-    this.getNextMovies(event, true);
-    this.enabled = true;
-    this.movies = [];
   }
 
 }

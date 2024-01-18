@@ -28,7 +28,15 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  }
+  },
+  {
+    path: 'movie-detail',
+    loadChildren: () => import('./pages/movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
+  },
+  {
+    path: 'change-logo',
+    loadChildren: () => import('./pages/change-logo/change-logo.module').then( m => m.ChangeLogoPageModule)
+  },
 ];
 
 @NgModule({

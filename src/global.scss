@@ -25,18 +25,29 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-.internal-page {
-    --background: var(--page-text-color);
-    background: var(--page-text-color);
-    padding: 20px 20px;
-    height: 100%;
-    --color: var(--page-background);
-    color: var(--page-background);
+.primary-buttons {
+    font-size: 16px;
+    text-transform: capitalize;
 }
 
-.internal-components {
-    background: var(--page-text-color);
-    color: var(--page-background);
+.internal-text {
+    font-size: 14px;
+}
+
+.main-title-text {
+    font-size: 16px;
+}
+
+.page-component-colors {
+    --background: var(--page-background);
+    background: var(--page-background);
+    --color: var(--page-text-color);
+    color: var(--page-text-color);
+}
+
+.internal-page {
+    padding: 20px 20px;
+    height: 100%;
 }
 
 .flex-center-center {

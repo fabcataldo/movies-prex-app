@@ -1,0 +1,29 @@
+.detail-container {
+    color: var(--page-text-color);
+    text-align: center;
+}
+.cover-container {
+    height: 200px;
+    width: 100%;
+}
+
+.cover {
+    height: 100%;
+}
+
+.movie-description {
+    font-size: 16px;
+}
+
+.rate-release-date-container{
+    display: flex;
+    padding: 10px 0px;
+    justify-content: space-around;
+
+    & .rate-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 5px;
+    }
+}

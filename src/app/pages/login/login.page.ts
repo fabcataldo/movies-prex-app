@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { IUser } from 'src/app/interfaces/user.model';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -23,16 +22,20 @@ export class LoginPage{
   ) { }
 
   async login(formLogin: NgForm){
-    if(formLogin.invalid){
+    if(formLogin.status === 'INVALID'){
       return;
     }
 
-    const valido = await this.userService.login(this.loginUser.username, this.loginUser.password);
-    if(valido){
-      this.navCtrl.navigateRoot('/home', {animated: true});
+    const isLoginSuccess = await this.userService.login(this.loginUser.username, this.loginUser.password);
+    if(isLoginSuccess){
+      this.navCtrl.navigateRoot('/home', {animated: true, replaceUrl: true});
     } else {
-      this.toastService.presentToast('Usuario y/o contraseña no son correctos.');
+      this.toastService.presentToast('Wrong username/password', 'danger');
     }
+  }
+
+  goToLogoChange() {
+    this.navCtrl.navigateRoot('/change-user-logo', {animated: true, replaceUrl: true});
   }
 
 }

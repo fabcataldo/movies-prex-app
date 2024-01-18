@@ -1,7 +1,7 @@
-<ion-content [fullscreen]="true" class="page">
-  <div class="internal-page flex-center-center">
+<ion-content [fullscreen]="true">
+  <div class="internal-page page-component-colors flex-center-center">
     <ion-avatar>
-      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
     </ion-avatar>
 
     <div class="fields-container flex-center-center">
@@ -25,15 +25,15 @@
           type="password"
           [(ngModel)]="loginUser.password"></ion-input>
           
-        <ion-button shape="round" type="submit"  expand="block">Login</ion-button>  
+        <ion-button class="primary-buttons" shape="round" type="submit"  expand="block">Login</ion-button>  
       </form>
     </div>
 
-    <div class="flex-center-center">      
-      <a>Create account</a>
+    <div class="flex-center-center ">      
+      <a class="page-component-colors internal-text">Create account</a>
     </div>
 
-    <a class="recover-password-label">Forgot password?</a>
+    <a class="recover-password-label page-component-colors internal-text">Forgot password?</a>
   </div>
 
 </ion-content>

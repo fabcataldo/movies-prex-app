@@ -24,7 +24,6 @@ export class EditMoviePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger;
     this.activatedRoute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         const realMovie: any = (this.router.getCurrentNavigation()?.extras?.state??['movie']);
@@ -60,7 +59,7 @@ export class EditMoviePage implements OnInit {
   }
 
   goToHome(){
-    this.navCtrl.navigateRoot('/home', {animated: true});
+    this.router.navigate(['/home'], {replaceUrl: true});
   }
 
 }

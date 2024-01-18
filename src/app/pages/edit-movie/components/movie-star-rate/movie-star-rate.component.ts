@@ -13,10 +13,10 @@ export class MovieStarRateComponent implements OnInit {
   rates: any
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+   }
 
   getRates = (defaultRate: number): Array<{rate: number, painted: boolean}> => {
-    debugger;
     let rates = [
       {
         rate: 1, painted: false

@@ -32,4 +32,8 @@ export class MoviesListComponent  implements OnInit {
     this.router.navigate(['/edit-movie'], {state: {movie}});
   }
 
+  goToDetailsPage(movie: any){
+    this.router.navigate(['/movie-detail'], {state: {movie}});
+  }
+
 }

@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="page-component-colors">
     <ion-buttons slot="start">
       <ion-back-button text="Back" icon="caret-back" (click)="goToHome()"></ion-back-button>
     </ion-buttons>
@@ -7,40 +7,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="page">
-  <div class="internal-page flex-center-center">
-    <div class="fields-container flex-center-center">
-      <form (ngSubmit)="updateMovie(fMovie)" #fMovie="ngForm">
-        <ion-input
-          label="Title"
-          label-placement="floating"
-          fill="outline"
-          placeholder="Enter title"
-          name="title"
-          type="text"
-          [(ngModel)]="movieForSaving.title"
-          value="movieForSaving.title"
-          required></ion-input>
+<ion-content class="page-component-colors">
+  <form (ngSubmit)="updateMovie(fMovie)" #fMovie="ngForm">
+    <div class="fields-container internal-page">
+      <ion-input
+        label="Title"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter title"
+        name="title"
+        type="text"
+        [(ngModel)]="movieForSaving.title"
+        value="movieForSaving.title" required
+        class="field"></ion-input>
 
-        <ion-input 
-          label="Description"
-          label-placement="floating"
-          fill="outline"
-          placeholder="Enter description"
-          name="description"
-          type="text"
-          [(ngModel)]="movieForSaving.description"
-          value="movieForSaving.description"></ion-input>         
-        
-        <movie-star-rate [movieRate]="movieForSaving.rate || 0" (movieRateChanged)="onMovieRateChange($event)">
-          
-        </movie-star-rate>
-        <ion-button shape="round" type="submit" expand="block">Save</ion-button>  
-      </form>
+      <ion-textarea label="Description"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter description"
+        name="description"
+        type="text"
+        [(ngModel)]="movieForSaving.description"
+        value="movieForSaving.description"
+        class="field"></ion-textarea>
+
+        <div class="field">
+          <div>Rate</div>
+          <movie-star-rate [movieRate]="movieForSaving.rate || 0" [showOnly]=false
+            (movieRateChanged)="onMovieRateChange($event)">
+          </movie-star-rate>
+        </div>
     </div>
-  </div>
+  
+    <div class="flex-center-center">
+      <ion-button shape="round" type="submit" expand="block">Save</ion-button>
+    </div>
+  
+  </form>
 
 </ion-content>
-
-
-
