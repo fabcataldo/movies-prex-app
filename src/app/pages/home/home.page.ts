@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { GetAllMoviesResponse } from 'src/app/interfaces/get-all-movies.model';
 import { IMovie } from 'src/app/interfaces/movie.model';
+import { RequestErrorResponse } from 'src/app/interfaces/request-error-response.model';
+import { RequestMoviesResponse } from 'src/app/interfaces/request-movies-response.model';
 import { MovieService } from 'src/app/services/movie.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -10,33 +12,40 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class HomePage implements OnInit{
   movies: Array<IMovie> = [];
-  enabled = true;
 
-  constructor(private movieService: MovieService) {
-    this.getNextMovies();
+  constructor(
+    private movieService: MovieService,
+    private toastService: ToastService
+  ) {
+    this.getNextMovies(null);
 
     console.log('GOT IT')
     console.log(this.movies)
   }
 
   ngOnInit(): void {
-    this.getNextMovies();
+    this.getNextMovies(null);
   }
 
-  async getNextMovies(event: any = null, pull: boolean = false){
-    const response = await this.movieService.getMovies(pull);
-    if(response){
-      this.movieService.moviesChanged.subscribe((resp => {
-        this.movies = resp;
+  async getNextMovies(event: CustomEvent | null){
+    this.movieService.getMovies().then(resp => {
+      if(resp.ok){
+        this.movies = (resp as RequestMoviesResponse).movies as IMovie[];
         if(event){
-          event.target.complete();
-  
-          if(resp.length === 0){
-            this.enabled = false;
-          }
+          event.detail.complete();
         }
-      }))
-    }
+      } else {
+        console.log((resp as RequestErrorResponse).error);
+        this.toastService.presentToast('Something went wrong', 'danger');
+      }
+    });
   }
 
+  
+  reload(event: CustomEvent){
+    console.log('event')
+    console.log(event)
+    this.getNextMovies(event);
+    this.movies = [];
+  }
 }

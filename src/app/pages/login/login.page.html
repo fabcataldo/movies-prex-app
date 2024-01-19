@@ -1,9 +1,5 @@
 <ion-content [fullscreen]="true">
   <div class="internal-page page-component-colors flex-center-center">
-    <ion-avatar>
-      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-
     <div class="fields-container flex-center-center">
       <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
         <ion-input
@@ -23,7 +19,8 @@
           placeholder="Enter password"
           name="password"
           type="password"
-          [(ngModel)]="loginUser.password"></ion-input>
+          [(ngModel)]="loginUser.password"
+          required></ion-input>
           
         <ion-button class="primary-buttons" shape="round" type="submit"  expand="block">Login</ion-button>  
       </form>

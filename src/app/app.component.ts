@@ -10,15 +10,22 @@ import { IUser } from './interfaces/user.model';
 })
 export class AppComponent implements OnInit{
   user: IUser | null = null;
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(public userService: UserService, private router: Router) {
+    debugger;
+    this.user = this.userService.getUser();
+  }
   
   ngOnInit(): void {
-    this.user = this.userService.getUsuario();
+    console.log('this. user app component')
+    console.log(this.user)
   }
-
 
   logout() {
     this.userService.logout();
     this.router.navigate(['/login'], {replaceUrl: true});
+  }
+
+  goToChangeAvatarPage() {
+    this.router.navigate(['/change-user-avatar'], {replaceUrl: true});
   }
 }

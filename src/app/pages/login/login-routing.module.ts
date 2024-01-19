@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginPage } from './login.page';
-import { UserService } from 'src/app/services/user.service';
 
 const routes: Routes = [
   {
@@ -13,7 +12,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [UserService]
+  exports: [RouterModule]
 })
 export class LoginPageRoutingModule {}

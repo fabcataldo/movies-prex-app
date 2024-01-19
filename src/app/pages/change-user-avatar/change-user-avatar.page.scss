@@ -1,0 +1,14 @@
+.select-avatar-label {
+    padding: 10px 0px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.avatar-selected {
+    border: 4px solid var(--primary-button);
+}
+
+.avatar {
+    width: 10rem;
+    height: 10rem;
+}

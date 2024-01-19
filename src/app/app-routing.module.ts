@@ -34,8 +34,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
   },
   {
-    path: 'change-logo',
-    loadChildren: () => import('./pages/change-logo/change-logo.module').then( m => m.ChangeLogoPageModule)
+    path: 'change-user-avatar',
+    loadChildren: () => import('./pages/change-user-avatar/change-user-avatar.module').then( m => m.ChangeUserAvatarPageModule)
   },
 ];
 

@@ -28,7 +28,7 @@
         name="description"
         type="text"
         [(ngModel)]="movieForSaving.description"
-        value="movieForSaving.description"
+        value="movieForSaving.description" required
         class="form-field"></ion-textarea>
 
         <div class="field">
@@ -40,7 +40,7 @@
     </div>
   
     <div class="flex-center-center">
-      <ion-button shape="round" type="submit" expand="block">Save</ion-button>
+      <ion-button shape="round" type="submit" expand="block" class="primary-buttons">Save</ion-button>
     </div>
   
   </form>

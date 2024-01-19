@@ -1,6 +1,6 @@
 import { IMovie } from "./movie.model";
 
-export interface GetAllMoviesResponse {
+export interface RequestMoviesResponse {
     ok: boolean
     movies: Array<IMovie>
 }

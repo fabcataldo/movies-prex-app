@@ -13,7 +13,12 @@ import { UserService } from '../services/user.service';
     constructor(private userService: UserService){ }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const clonedRequest = req.clone({ headers: req.headers.append('x-token', this.userService.getToken() ) });
-      return next.handle(clonedRequest);
+      if(!req.url.includes('login')){
+        const clonedRequest = req.clone({ headers: req.headers.append('x-token', this.userService.getToken() ) });
+        return next.handle(clonedRequest);
+      } else {
+        return next.handle(req);
+      }
+      
     }
   }

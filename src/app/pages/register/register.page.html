@@ -14,13 +14,15 @@
         type="text" [(ngModel)]="registerUser.email" required
         class="form-field"></ion-input>
 
-      <ion-input class="form-field" label="Username" label-placement="floating" fill="outline" placeholder="Enter username" name="username"
-        type="text" [(ngModel)]="registerUser.username" required></ion-input>
+      <ion-input class="form-field" label="Username" label-placement="floating" fill="outline"
+        placeholder="Enter username" name="username" type="text" minlength="4"
+        [(ngModel)]="registerUser.username" required></ion-input>
 
-      <ion-input class="form-field" label="Password" label-placement="floating" fill="outline" placeholder="Enter password" name="password"
-        type="password" [(ngModel)]="registerUser.password"></ion-input>
+      <ion-input class="form-field" label="Password" label-placement="floating" fill="outline"
+        placeholder="Enter password" name="password" minlength="6" type="password"
+        [(ngModel)]="registerUser.password"></ion-input>
 
-      <ion-button shape="round" type="submit" expand="block">Create account</ion-button>
+      <ion-button shape="round" type="submit" expand="block" class="primary-buttons">Create account</ion-button>
       <a
         class="flex-center-center cancel-label"
         (click)="goToLogin()">

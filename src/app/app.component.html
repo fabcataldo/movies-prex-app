@@ -5,9 +5,15 @@
         <ion-list id="inbox-list" class="internal-page page-component-colors">
           <ion-list-header class="list-header">Movies</ion-list-header>
           <ion-note class="page-component-colors">Welcome {{user!.username}}</ion-note>
-
+          <ion-avatar class="avatar">
+            <img [src]="user!.avatar"/>
+          </ion-avatar>
           <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false" (click)="logout()" class="page-component-colors" lines="full">
+            <ion-item detail="false" (click)="goToChangeAvatarPage()" class="page-component-colors" lines="full">
+              <ion-icon aria-hidden="true" slot="start" ios="log-out-outline" md="log-out-outline"></ion-icon>
+              <ion-label>Change user avatar</ion-label>
+            </ion-item>
+            <ion-item detail="false" (click)="logout()" class="page-component-colors" lines="full">
               <ion-icon aria-hidden="true" slot="start" ios="log-out-outline" md="log-out-outline"></ion-icon>
               <ion-label>Logout</ion-label>
             </ion-item>

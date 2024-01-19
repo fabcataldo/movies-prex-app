@@ -9,5 +9,9 @@
 
 
 <ion-content [fullscreen]="true" class="internal-page">
+  <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <movies-list [movies]="movies"></movies-list>
 </ion-content>

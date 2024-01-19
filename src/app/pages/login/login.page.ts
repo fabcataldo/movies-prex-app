@@ -22,7 +22,7 @@ export class LoginPage{
   ) { }
 
   async login(formLogin: NgForm){
-    if(formLogin.status === 'INVALID'){
+    if(!this.validateLoginForm(formLogin)){
       return;
     }
 
@@ -40,6 +40,18 @@ export class LoginPage{
 
   goToRegisterPage(){
     this.navCtrl.navigateRoot('/register', {animated: true, replaceUrl: true});
+  }
+
+  validateLoginForm(formLogin: NgForm) {
+    if (formLogin.form.controls['username'].errors?.['required']){
+      this.toastService.presentToast('Username is mandatory', 'tertiary');
+      return false;
+    } else if (formLogin.form.controls['password'].errors?.['required']){
+      this.toastService.presentToast('Password is mandatory', 'tertiary');
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }
