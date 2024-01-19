@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IMovie } from 'src/app/interfaces/movie.model';
 import { RequestErrorResponse } from 'src/app/interfaces/request-error-response.model';
 import { RequestMoviesResponse } from 'src/app/interfaces/request-movies-response.model';
@@ -10,17 +10,13 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage{
   movies: Array<IMovie> = [];
 
   constructor(
     private movieService: MovieService,
     private toastService: ToastService
   ) {
-    this.getNextMovies(null);
-  }
-
-  ngOnInit(): void {
     this.getNextMovies(null);
   }
 
