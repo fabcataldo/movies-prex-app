@@ -24,8 +24,6 @@ export class ChangeUserAvatarPage implements OnInit {
 
   ngOnInit() {
     this.avatarSelected = this.userService.getUser().avatar;
-    console.log('this.avatarSelected')
-    console.log(this.avatarSelected)
   }
 
   selectAvatar(avatar: string) {

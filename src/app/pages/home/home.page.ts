@@ -18,9 +18,6 @@ export class HomePage implements OnInit{
     private toastService: ToastService
   ) {
     this.getNextMovies(null);
-
-    console.log('GOT IT')
-    console.log(this.movies)
   }
 
   ngOnInit(): void {
@@ -43,8 +40,6 @@ export class HomePage implements OnInit{
 
   
   reload(event: CustomEvent){
-    console.log('event')
-    console.log(event)
     this.getNextMovies(event);
     this.movies = [];
   }

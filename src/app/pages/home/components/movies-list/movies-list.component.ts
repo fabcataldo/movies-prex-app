@@ -16,16 +16,10 @@ export class MoviesListComponent  implements OnInit {
   constructor(private router: Router, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log('this.moviessssss')
-    console.log(this.movies)
     const movieSanitized = this.movies.map(movie => 
         ({...movie, cover: this.sanitizer.bypassSecurityTrustResourceUrl(movie.cover || '')})
     )
     this.movies = movieSanitized as Array<IMovie>;
-
-    console.log('this.movies')
-    console.log(this.movies)
-    console.log(movieSanitized)
   }
 
   goToEditMovie(movie: any) {
