@@ -8,17 +8,8 @@ import { IUser } from './interfaces/user.model';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit{
-  user: IUser | null = null;
-  constructor(public userService: UserService, private router: Router) {
-    debugger;
-    this.user = this.userService.getUser();
-  }
-  
-  ngOnInit(): void {
-    console.log('this. user app component')
-    console.log(this.user)
-  }
+export class AppComponent{
+  constructor(public userService: UserService, private router: Router) { }
 
   logout() {
     this.userService.logout();
