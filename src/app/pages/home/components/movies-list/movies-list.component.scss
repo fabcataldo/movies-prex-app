@@ -1,0 +1,87 @@
+ion-list {
+    padding: 0px 15px;
+}
+
+ion-item {
+    color: inherit;
+    &::part(native) {
+        padding-left: 0;
+    }
+}
+.cover-container {
+    width: 20%;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+}
+
+.texts-container {
+    width: 80%;
+    display: flex;
+    height: 160px;
+    flex-direction: column;
+    background: var(--texts-movie-list);
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.movie-title {
+    font-size: 18px;
+}
+
+.movie-description {
+    height: 5rem;
+    text-align: center;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.rate-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px 0px 1px 10px;
+    height: 10%;
+}
+
+.title-desc-container {
+    height: 90%;
+    justify-content: space-between;
+}
+
+.rate-label{
+    font-size: 12px;
+}
+
+.movie-item {
+    border-radius: 10px 25px 25px 15px;
+    --background: var(--grey);
+    color: var(--black-text);
+    width: 102%;
+
+    .movie-item-subcontainer {
+        display: flex;
+        height: 160px;
+        width: 100%;
+    }
+}
+
+.slided-item-option {
+    width: 3rem;
+    height: 160px;
+    margin: 10px 0px;
+    border-top-right-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+}
+
+.sliding-item-container {
+    padding: 10px 0px;
+}

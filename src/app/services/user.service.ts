@@ -1,14 +1,21 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { IUser } from '../interfaces/user.model';
 import { Storage } from '@ionic/storage-angular';
+import { GetUserResponse } from '../interfaces/get-user.model';
+import { RegisterLoginUserResponse } from '../interfaces/register-login-user.model';
+import { environment } from 'src/environments/environment';
+import { RequestErrorResponse } from '../interfaces/request-error-response.model';
+import { RequestUserResponse } from '../interfaces/request-user-response.model';
 
+const URL = environment.url;
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
-  token = '';
+  private token = '';
   private user: IUser | null = null;
 
   constructor(private storage: Storage, private http: HttpClient, private navCtrl: NavController) {
@@ -19,15 +26,16 @@ export class UserService {
     await this.storage.create();
   }
 
-  login(email: string, password: string){
-    const data = { email, password };
+  login(username: string, password: string){
+    const data = { username, password };
+
     return new Promise(resolve => {
-      this.http.post(`${URL}/user/login`, data).subscribe(async res => {
-        console.log(res);
+      this.http.post(`${URL}/users/login`, data).subscribe(async res => {
+        const response = res as RegisterLoginUserResponse;
   
-        if(res['ok']){
-          await this.saveToken(res['token']);
-          this.user = res['user'];
+        if(response['ok']){
+          await this.saveToken(response['token']);
+          this.user = response['user'];
           resolve(true);
         } else {
           this.token = '';
@@ -48,12 +56,11 @@ export class UserService {
 
   register(user: IUser){
     return new Promise(resolve => {
-      this.http.post(`${URL}/user/create`, user).subscribe(async res=>{
-        console.log(res);
-
-        if(res['ok']){
-          await this.saveToken(res['token']);
-          this.user = res['user'];
+      this.http.post(`${URL}/users/create`, user).subscribe(async (res)=>{
+        const response = res as RegisterLoginUserResponse;
+        if(response['ok']){
+          await this.saveToken(response['token']);
+          this.user = response['user'];
           resolve(true);
         } else {
           this.token = '';
@@ -65,11 +72,16 @@ export class UserService {
     });
   }
 
-  getUsuario(){
+  getUser(): IUser{
+    debugger;
     if(this.user?._id !== null){
       this.validateToken();
     }
-    return {...this.user};
+    return {...this.user} as IUser;
+  }
+
+  setUser(userP: IUser) {
+    this.user = userP;
   }
 
   async saveToken(token: string){
@@ -83,6 +95,10 @@ export class UserService {
     this.token = await this.storage.get('token') || null;
   }
 
+  getToken(): string {
+    return this.token;
+  }
+
   async validateToken(): Promise<boolean>{
     await this.loadToken();
     if(!this.token){
@@ -91,18 +107,24 @@ export class UserService {
     }
 
     return new Promise<boolean>( resolve => {
-      const headers = new HttpHeaders({
-        'x-token': this.token
-      });
-      this.http.get(`${URL}/user/`, { headers }).subscribe(resp => {
-        if(resp['ok'] != null){
-          this.user = resp['user'];
+      this.http.get(`${URL}/users/`).subscribe(resp => {
+        const response = resp as GetUserResponse;
+        if(response['ok'] != null){
+          this.setUser(response['user']);
           resolve(true);
         } else{
           this.navCtrl.navigateRoot('/login');
           resolve(false);
         }
       });
+    });
+  }
+
+  updateUserAvatar(userId: string, avatarUuid: string | undefined): Promise<RequestUserResponse | RequestErrorResponse> {
+    return new Promise(resolve => {
+      this.http.patch<RequestUserResponse | RequestErrorResponse>(`${URL}/users/${userId}/avatar`, {avatar: avatarUuid}).subscribe((resp) => {
+        resolve(resp);
+      });  
     });
   }
 }

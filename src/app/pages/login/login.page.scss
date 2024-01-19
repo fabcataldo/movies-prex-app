@@ -1,0 +1,18 @@
+.fields-container {
+    padding: 20px 0px;
+}
+
+ion-input {
+    margin-bottom: 15px;
+    --placeholder-color: white;
+    &.input-fill-outline{
+        --border-radius: 15px 15px;
+        min-height: 53px;
+    }
+}
+
+.recover-password-label {
+    position: fixed;
+    bottom: 1rem;
+}
+

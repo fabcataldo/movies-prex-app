@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngFor="let r of (movieRate | genericPipe:getRates)"  class="star">
+    <ion-icon
+      name="star" 
+      (click)="!showOnly && rate(r.rate)"
+      [ngStyle]="{'color': r.painted ? 'var(--movie-star-rate)' : 'inherit'}">
+    </ion-icon>
+  </div>
+</div>

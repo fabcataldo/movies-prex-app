@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="page-component-colors">
+    <ion-title>New account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page">
+  <div class="internal-page page-component-colors flex-center-center">
+    <form (ngSubmit)="register(fReg)" #fReg="ngForm">
+      <ion-input
+        label="Email"
+        label-placement="floating"
+         fill="outline" placeholder="Enter email" name="email"
+        type="text" [(ngModel)]="registerUser.email" required
+        class="form-field"></ion-input>
+
+      <ion-input class="form-field" label="Username" label-placement="floating" fill="outline"
+        placeholder="Enter username" name="username" type="text" minlength="4"
+        [(ngModel)]="registerUser.username" required></ion-input>
+
+      <ion-input class="form-field" label="Password" label-placement="floating" fill="outline"
+        placeholder="Enter password" name="password" minlength="6" type="password"
+        [(ngModel)]="registerUser.password"></ion-input>
+
+      <ion-button shape="round" type="submit" expand="block" class="primary-buttons">Create account</ion-button>
+      <a
+        class="flex-center-center cancel-label"
+        (click)="goToLogin()">
+        Cancel
+      </a>
+    </form>
+  </div>
+
+
+
+</ion-content>

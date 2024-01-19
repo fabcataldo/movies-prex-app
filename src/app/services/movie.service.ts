@@ -1,37 +1,35 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { GetAllMoviesResponse } from '../interfaces/get-all-movies.model';
+import { RequestMoviesResponse } from '../interfaces/request-movies-response.model';
 import { UserService } from './user.service';
 import { environment } from 'src/environments/environment';
 import { IMovie } from '../interfaces/movie.model';
-import { UpdateMovieResponse } from '../interfaces/update-movie.model';
+import { RequestErrorResponse } from '../interfaces/request-error-response.model';
 
+const URL = environment.url;
 @Injectable({
   providedIn: 'root'
 })
-private const URL = environment.url;
+
 export class MovieService {
+  currentPage = 0;
   movieChanged = new EventEmitter<IMovie>();
+  moviesChanged = new EventEmitter<Array<IMovie>>();
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getMovies(pull: boolean = false) {
-    return this.http.get<GetAllMoviesResponse>(`${URL}/movies/`);
+  getMovies(): Promise<RequestMoviesResponse | RequestErrorResponse> {
+    return new Promise(resolve => {
+      this.http.get<RequestMoviesResponse | RequestErrorResponse>(`${URL}/movies`).subscribe((resp: RequestMoviesResponse | RequestErrorResponse) => {
+        resolve(resp);
+      });
+    })
   }
 
-  updateMovie(movie: IMovie) {
-    const headers = new HttpHeaders({
-      'x-token': this.userService.token
-    })
+  updateMovie(movie: IMovie): Promise<RequestMoviesResponse | RequestErrorResponse> {
     return new Promise(resolve => {
-      this.http.patch(`${URL}/movies`, movie, {headers}).subscribe((resp) => {
-        const response = resp as UpdateMovieResponse;
-        if(response['ok']){
-          this.movieChanged.emit(response['movie']);
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+      this.http.patch<RequestMoviesResponse | RequestErrorResponse>(`${URL}/movies/${movie._id}`, movie).subscribe((resp) => {
+        resolve(resp);
       });  
     });
   }

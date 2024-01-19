@@ -1,6 +1,38 @@
-<ion-content [fullscreen]="true" class="page">
-  <ion-input label="Username" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
-  <ion-input label="Password" label-placement="floating" fill="outline" placeholder="Enter text"></ion-input>
+<ion-content [fullscreen]="true">
+  <div class="internal-page page-component-colors flex-center-center">
+    <div class="fields-container flex-center-center">
+      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
+        <ion-input
+          label="Username"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter username"
+          name="username"
+          type="text"
+          [(ngModel)]="loginUser.username"
+          required></ion-input>
 
-  <ion-button>Login</ion-button>
+        <ion-input 
+          label="Password"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Enter password"
+          name="password"
+          type="password"
+          [(ngModel)]="loginUser.password"
+          required></ion-input>
+          
+        <ion-button class="primary-buttons" shape="round" type="submit"  expand="block">Login</ion-button>  
+      </form>
+    </div>
+
+    <div class="flex-center-center ">      
+      <a class="page-component-colors internal-text" (click)="goToRegisterPage()">Create account</a>
+    </div>
+
+    <a class="recover-password-label page-component-colors internal-text">Forgot password?</a>
+  </div>
+
 </ion-content>
+
+

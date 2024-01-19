@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="page-component-colors">
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" icon="caret-back" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  (click)="goToEditMoviePage()">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{movie.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-component-colors">
+  <div class="internal-page detail-container">
+    <div class="cover-container flex-center-center">
+      <img class="cover" [src]="movie.cover">
+    </div>
+    <div class="rate-release-date-container">
+      <div class="rate-container">
+        <div>Rate</div>
+        <movie-star-rate [movieRate]="movie.rate || 0" [showOnly]="false">   </movie-star-rate>
+      </div>
+      <div class=" flex-center-center">
+        {{movie.releaseDate! | genericPipe:formatDate}}
+      </div>  
+    </div>
+  
+    <div class="texts-container">
+      <div class="flex-center-center title-desc-container">
+        <div class="movie-description">{{movie.description}}</div>
+      </div>
+    </div>
+  
+  </div>
+
+</ion-content>
+
+
+

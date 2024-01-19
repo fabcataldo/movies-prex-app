@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="page-component-colors">
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" icon="caret-back" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Change user avatar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-component-colors">
+  <div class="select-avatar-label">
+    Select an avatar
+  </div>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-lg="3" size-mg="4" size-sm="6" size-xs="6"
+        *ngFor="let avatar of defaultAvatars" class="flex-center-center">
+        <ion-avatar class="avatar" [class.avatar-selected]="avatarSelected! === avatar.uuid">
+          <img [src]="avatar.url" (click)="selectAvatar(avatar.uuid)"/>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="flex-center-center">
+    <ion-button shape="round" type="submit" expand="block" class="primary-buttons" (click)="saveAvatar()">Save avatar</ion-button>
+  </div>
+</ion-content>
